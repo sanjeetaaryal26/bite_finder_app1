@@ -1,4 +1,4 @@
-import 'package:bite_finder_app/screen/login_screen.dart';
+import 'package:bite_finder_app/screen/choose_screen.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -20,7 +20,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
     super.dispose();
   }
 
-
   void _goNext() {
     if (_currentIndex < 2) {
       _controller.nextPage(
@@ -30,7 +29,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
+        MaterialPageRoute(builder: (_) => const BiteWelcomePage()),
       );
     }
   }
@@ -73,15 +72,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
 
                   _OnboardFrame(
-                    image:
-                        'assets/icon/image/momo.jpg',
+                    image: 'assets/icon/image/momo.jpg',
                     title: 'Local Food',
                     text: 'Find the freshest and tastiest dishes near you.',
                     isNetworkImage: true,
                   ),
                   _OnboardFrame(
-                    image:
-                        'assets/icon/image/burger.jpg',
+                    image: 'assets/icon/image/burger.jpg',
                     title: 'Multiple Cuisines',
                     text: 'Discover pizza, momo and many more items.',
                     isNetworkImage: true,
