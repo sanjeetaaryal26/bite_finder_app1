@@ -20,6 +20,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     super.dispose();
   }
 
+
   void _goNext() {
     if (_currentIndex < 2) {
       _controller.nextPage(
@@ -70,10 +71,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     text: 'We deliver your order quickly to your door.',
                     isNetworkImage: true,
                   ),
+
                   _OnboardFrame(
                     image:
                         'assets/icon/image/momo.jpg',
-                    title: 'Fresh Food',
+                    title: 'Local Food',
                     text: 'Find the freshest and tastiest dishes near you.',
                     isNetworkImage: true,
                   ),
