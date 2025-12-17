@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
+
 import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -27,12 +27,12 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _handleLogin() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomePage()),
-    );
-  }
+  // void _handleLogin() {
+  //   Navigator.pushReplacement(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => const HomePage()),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Login Button
                   Center(
                     child: GestureDetector(
-                      onTap: _handleLogin,
+                      // onTap: _handleLogin,
                       child: Container(
                         width: double.infinity,
                         height: 55,
