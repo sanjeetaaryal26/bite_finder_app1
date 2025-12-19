@@ -63,25 +63,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 onPageChanged: (index) {
                   setState(() => _currentIndex = index);
                 },
-                children: [
+                children: const [
                   _OnboardFrame(
                     image: 'assets/icon/image/Pizza.jpg',
                     title: 'Welcome to BiteFinder',
                     text: 'We deliver your order quickly to your door.',
-                    isNetworkImage: true,
                   ),
-
                   _OnboardFrame(
                     image: 'assets/icon/image/momo.jpg',
                     title: 'Local Food',
                     text: 'Find the freshest and tastiest dishes near you.',
-                    isNetworkImage: true,
                   ),
                   _OnboardFrame(
                     image: 'assets/icon/image/burger.jpg',
                     title: 'Multiple Cuisines',
                     text: 'Discover pizza, momo and many more items.',
-                    isNetworkImage: true,
                   ),
                 ],
               ),
@@ -143,13 +139,11 @@ class _OnboardFrame extends StatelessWidget {
   final String image;
   final String title;
   final String text;
-  final bool isNetworkImage;
 
   const _OnboardFrame({
     required this.image,
     required this.title,
     required this.text,
-    this.isNetworkImage = false,
   });
 
   @override
@@ -161,20 +155,7 @@ class _OnboardFrame extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 24),
-          Expanded(
-            child: isNetworkImage
-                ? Image.network(
-                    image,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey.shade200,
-                        child: const Icon(Icons.image_not_supported),
-                      );
-                    },
-                  )
-                : Image.asset(image, fit: BoxFit.contain),
-          ),
+          Expanded(child: Image.asset(image, fit: BoxFit.contain)),
           const SizedBox(height: 24),
           Text(
             title,
