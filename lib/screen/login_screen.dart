@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'signup_screen.dart';
+import 'button_navigation_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -27,23 +27,23 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  // void _handleLogin() {
-  //   Navigator.pushReplacement(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => const HomePage()),
-  //   );
-  // }
+  void _handleLogin() {
+    // You can add validation or API call here later
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const BottomNavigationScreen()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF7A0000), // Dark red
-              Color(0xFFEEC8C8), // Light gradient
-            ],
+            colors: [Color(0xFF7A0000), Color(0xFFEEC8C8)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -69,9 +69,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 25),
 
-                  // Main Title
+                  // Title
                   const Text(
-                    "Log in to your\naccount",
+                    "Log in to your\n account",
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w700,
@@ -81,11 +81,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 25),
 
-                  // Bite Logo
+                  // Logo
                   Center(
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           "Bite",
                           style: TextStyle(
                             fontSize: 65,
@@ -93,7 +93,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Color(0xFFFFC400),
                           ),
                         ),
-
                         Transform.translate(
                           offset: const Offset(0, -20),
                           child: Container(
@@ -111,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 10),
 
-                  // Email Field
+                  // Email
                   TextField(
                     controller: _emailController,
                     decoration: const InputDecoration(
@@ -127,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 15),
 
-                  // Password Field
+                  // Password
                   TextField(
                     controller: _passwordController,
                     obscureText: true,
@@ -147,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Login Button
                   Center(
                     child: GestureDetector(
-                      // onTap: _handleLogin,
+                      onTap: _handleLogin,
                       child: Container(
                         width: double.infinity,
                         height: 55,
@@ -181,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 40),
 
-                  // Sign Up Text
+                  // Sign Up
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -208,8 +207,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-
-                  const SizedBox(height: 40),
                 ],
               ),
             ),

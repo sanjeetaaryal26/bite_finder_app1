@@ -65,7 +65,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 },
                 children: [
                   _OnboardFrame(
-                    image: 'assets/icon/image/Pizza-3007395.jpg',
+                    image: 'assets/icon/image/Pizza.jpg',
                     title: 'Welcome to BiteFinder',
                     text: 'We deliver your order quickly to your door.',
                     isNetworkImage: true,

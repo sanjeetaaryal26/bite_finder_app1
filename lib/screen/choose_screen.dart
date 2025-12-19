@@ -30,7 +30,7 @@ class BiteWelcomePage extends StatelessWidget {
 
             // Buttons row
             Padding(
-              padding: const EdgeInsets.only(bottom: 24),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -58,6 +58,7 @@ class BiteWelcomePage extends StatelessWidget {
                       );
                     },
                   ),
+                  const SizedBox(height: 200),
                 ],
               ),
             ),
