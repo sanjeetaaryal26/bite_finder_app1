@@ -15,7 +15,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = const [
-    HomeScreen(),
+    HomePage(),
     FavouriteScreen(),
     ProfileScreen(),
     NotificationScreen(),
@@ -24,17 +24,12 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Bottom Navigation"),
-        centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 239, 250, 115),
-      ),
       body: _screens[0],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
-        selectedItemColor: Color.fromARGB(255, 72, 103, 255),
-        unselectedItemColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.black,
         currentIndex: _selectedIndex,
         onTap: (index) {
           setState(() {
