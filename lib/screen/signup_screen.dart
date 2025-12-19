@@ -4,11 +4,11 @@ import 'login_screen.dart';
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF7A0000), Color(0xFFEEC8C8)],
@@ -17,7 +17,6 @@ class SignUpScreen extends StatelessWidget {
           ),
         ),
 
-        
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
