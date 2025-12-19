@@ -30,6 +30,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
 
+        selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -41,18 +42,22 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home), // ✅ filled when selected
             label: "Home",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag_outlined),
+            activeIcon: Icon(Icons.shopping_bag),
             label: "Favourite",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
+            activeIcon: Icon(Icons.person),
             label: "Profile",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications_outlined),
+            activeIcon: Icon(Icons.notifications),
             label: "Notification",
           ),
         ],
