@@ -12,7 +12,7 @@ class BottomNavigationScreen extends StatefulWidget {
 }
 
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
-  int _selectedIndex = 0;
+  int _currentIndex = 0;
 
   final List<Widget> _screens = const [
     HomePage(),
@@ -24,38 +24,38 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[0],
+      body: _screens[_currentIndex],
+
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        selectedItemColor: Colors.red,
+
         unselectedItemColor: Colors.black,
-        currentIndex: _selectedIndex,
+        currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
-            _selectedIndex = index;
+            _currentIndex = index;
           });
         },
+
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
+            icon: Icon(Icons.home_outlined),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag_outlined),
             label: "Favourite",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
+            icon: Icon(Icons.person_outline),
+            label: "Profile",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications_outlined),
             label: "Notification",
           ),
         ],
-        // backgroundColor: Colors.black,
-        // selectedItemColor: const Color.fromARGB(255, 72, 103, 255),
-        // unselectedItemColor: Colors.white,
-        // currentIndex: _selectedIndex,
-        // onTap: (index) {
-        //   setState(() {
-        //     _selectedIndex = index;
-        //   });
       ),
     );
   }
