@@ -41,12 +41,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontSize: 80,
                 fontWeight: FontWeight.w900,
                 color: const Color(0xFFFFC400), // Yellow color
-                fontFamily: 'Roboto', // Use custom font if required
+                // Use the custom OpenSansCondensed font registered in pubspec.yaml
+                fontFamily: 'OpenSansCondensed',
               ),
             ),
-
-
-
 
             // Curved underline shape (made using Container)
             Transform.translate(

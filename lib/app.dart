@@ -8,6 +8,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Splash Screen Demo', home: const SplashScreen());
+    return MaterialApp(
+      title: 'Splash Screen Demo',
+      theme: ThemeData(fontFamily: 'OpenSansCondensed'),
+      home: const SplashScreen(),
+    );
   }
 }
