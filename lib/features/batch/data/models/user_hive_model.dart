@@ -1,65 +1,69 @@
-import 'package:equatable/equatable.dart';
+import 'package:bite_finder_app/core/constants/hive_table_constant.dart';
+import 'package:bite_finder_app/features/batch/domain/entities/user_entity.dart';
+import 'package:hive/hive.dart';
 
-/// Base Failure class
-abstract class Failure extends Equatable {
-  final String message;
-  const Failure(this.message);
+import 'package:uuid/uuid.dart';
 
-  @override
-  List<Object?> get props => [message];
-}
+part 'user_hive_model.g.dart'; 
 
-/// Local database (Hive) related failures
-class LocalDatabaseFailure extends Failure {
-  const LocalDatabaseFailure({
-    String message = 'Local database operation failed',
-  }) : super(message);
-}
 
-/// API / Network related failures
-class ApiFailure extends Failure {
-  final int? statusCode;
+@HiveType(typeId: HiveTableConstant.restaurantTypeId)
+class RestaurantHiveModel extends HiveObject {
+  @HiveField(0)
+  final String? restaurantId;
 
-  const ApiFailure({
-    required String message,
-    this.statusCode,
-  }) : super(message);
+  @HiveField(1)
+  final String restaurantName;
 
-  @override
-  List<Object?> get props => [message, statusCode];
-}
+  @HiveField(2)
+  final String? description;
 
-/// Authentication failures (Login / Register)
-class AuthFailure extends Failure {
-  const AuthFailure({
-    String message = 'Authentication failed',
-  }) : super(message);
-}
+  @HiveField(3)
+  final double? rating;
 
-/// Restaurant related failures
-class RestaurantFailure extends Failure {
-  const RestaurantFailure({
-    String message = 'Failed to load restaurant data',
-  }) : super(message);
-}
+  @HiveField(4)
+  final String? imageUrl;
 
-/// Review & Rating related failures
-class ReviewFailure extends Failure {
-  const ReviewFailure({
-    String message = 'Failed to process review or rating',
-  }) : super(message);
-}
+  @HiveField(5)
+  final String? category;
 
-/// Favorite restaurants related failures
-class FavoriteFailure extends Failure {
-  const FavoriteFailure({
-    String message = 'Failed to update favorite restaurants',
-  }) : super(message);
-}
+  RestaurantHiveModel({
+    String? restaurantId,
+    required this.restaurantName,
+    this.description,
+    this.rating,
+    this.imageUrl,
+    this.category,
+  }) : restaurantId = restaurantId ?? const Uuid().v4();
 
-/// Search & Filter related failures
-class SearchFailure extends Failure {
-  const SearchFailure({
-    String message = 'Search operation failed',
-  }) : super(message);
+  /// Convert Hive Model to Entity
+  RestaurantEntity toEntity() {
+    return RestaurantEntity(
+      restaurantId: restaurantId,
+      restaurantName: restaurantName,
+      description: description,
+      rating: rating,
+      imageUrl: imageUrl,
+      category: category,
+    );
+  }
+
+  /// Convert Entity to Hive Model
+  factory RestaurantHiveModel.fromEntity(RestaurantEntity entity) {
+    return RestaurantHiveModel(
+      restaurantId: entity.restaurantId,
+      restaurantName: entity.restaurantName,
+      description: entity.description,
+      rating: entity.rating,
+      imageUrl: entity.imageUrl,
+      category: entity.category,
+    );
+  }
+
+  /// Convert List of Models to List of Entities
+  static List<RestaurantEntity> toEntityList(
+    List<RestaurantHiveModel> models,
+  ) {
+    return models.map((model) => model.toEntity()).toList();
+  }
 }
