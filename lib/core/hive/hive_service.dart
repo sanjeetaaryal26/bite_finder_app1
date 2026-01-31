@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 
 import 'package:uuid/uuid.dart';
 
+
 final hiveServiceProvider = Provider<HiveService>((ref) {
   return HiveService();
 });
@@ -31,6 +32,8 @@ class HiveService {
   /// Open all required boxes
   Future<void> _openBoxes() async {
     await Hive.openBox<AuthHiveModel>(HiveTableConstant.userTable);
+
+
   }
 
   /// Perform a one-time cleanup for empty-email users (debug builds only)
@@ -50,7 +53,6 @@ class HiveService {
       }
     }
   }
-
   /// Close all Hive boxes
   Future<void> close() async {
     await Hive.close();
@@ -65,9 +67,7 @@ class HiveService {
     final id = user.authId ?? Uuid().v4();
     debugPrint('HiveService.register: id=$id email=${user.email}');
     await _authBox.put(id, user);
-    debugPrint(
-      'HiveService.register: boxSize=${_authBox.length}, keys=${_authBox.keys.toList()}',
-    );
+    debugPrint('HiveService.register: boxSize=${_authBox.length}, keys=${_authBox.keys.toList()}');
     return user;
   }
 
@@ -77,9 +77,7 @@ class HiveService {
     final lookupPassword = password.trim();
 
     if (lookupEmail.isEmpty || lookupPassword.isEmpty) {
-      debugPrint(
-        'HiveService.login: empty email or password provided - email="$lookupEmail"',
-      );
+      debugPrint('HiveService.login: empty email or password provided - email="$lookupEmail"');
       return null;
     }
 
@@ -152,15 +150,12 @@ class HiveService {
       debugPrint('HiveService.doesEmailExist: empty lookup, returning false');
       return false;
     }
-    final exists = _authBox.values.any(
-      (user) => user.email.trim().toLowerCase() == lookupEmail,
-    );
+    final exists = _authBox.values.any((user) => user.email.trim().toLowerCase() == lookupEmail);
     debugPrint('HiveService.doesEmailExist: email=$lookupEmail exists=$exists');
     return exists;
   }
-
   /// Upload profile image path for user
-  Future<bool> uploadProfileImage(String authId, String imagePath) async {
+  Future<bool> uploadProfileImage(String authId, String imagePath) async {  
     final user = _authBox.get(authId);
     if (user != null) {
       final updatedUser = AuthHiveModel(
@@ -168,20 +163,15 @@ class HiveService {
         email: user.email,
         phoneNumber: user.phoneNumber,
         password: user.password,
-        profilePicture: imagePath,
-        username: user.username
+        profilePicture: imagePath, username: '',
       );
       await _authBox.put(authId, updatedUser);
-      debugPrint(
-        'HiveService.uploadProfileImage: updated profile image for authId=$authId',
-      );
+      debugPrint('HiveService.uploadProfileImage: updated profile image for authId=$authId');
       return true;
     }
-    debugPrint(
-      'HiveService.uploadProfileImage: user not found for authId=$authId',
-    );
+    debugPrint('HiveService.uploadProfileImage: user not found for authId=$authId');
     return false;
   }
 
-  /// Open boxes in _openBoxes
+
 }

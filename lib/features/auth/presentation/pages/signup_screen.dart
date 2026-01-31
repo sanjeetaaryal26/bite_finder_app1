@@ -1,11 +1,25 @@
+import 'package:bite_finder_app/features/auth/presentation/view_model/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'login_screen.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
 
   @override
+  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
+  final userNameController = TextEditingController(text: "Sanjeeta");
+    final emailController = TextEditingController(text: "sanjeeta@gmail.com");
+    final passwordController = TextEditingController(text: "password123");
+    final phoneController = TextEditingController(text: "9812345678");
+
+  @override
   Widget build(BuildContext context) {
+    
+    
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -51,7 +65,8 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: 25),
 
                   // Username Field
-                  const TextField(
+                  TextField(
+                    controller: userNameController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white70,
@@ -66,7 +81,8 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: 15),
 
                   // Email Field
-                  const TextField(
+                  TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white70,
@@ -81,7 +97,8 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: 15),
 
                   // Password Field
-                  const TextField(
+                   TextField(
+                    controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
@@ -97,7 +114,8 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: 15),
 
                   // Phone Field
-                  const TextField(
+                   TextField(
+                    controller: phoneController,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       filled: true,
@@ -114,21 +132,16 @@ class SignUpScreen extends StatelessWidget {
 
                   //  Sign Up Button
                   GestureDetector(
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Account Created Successfully!"),
-                        ),
-                      );
-                      // Navigate to login after a short delay so snackbar is visible
-                      Future.delayed(const Duration(milliseconds: 800), () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
-                          ),
-                        );
-                      });
+                    onTap: () async {
+                      await ref
+                          .read(authViewModelProvider.notifier)
+                          .register(
+                            fullName: userNameController.text.trim(),
+                            email: emailController.text.trim(),
+                            username: userNameController.text.trim(),
+                            password: passwordController.text,
+                            confirmPassword: passwordController.text
+                          );
                     },
                     child: Container(
                       width: double.infinity,

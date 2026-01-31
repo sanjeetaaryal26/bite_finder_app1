@@ -1,23 +1,25 @@
+import 'package:bite_finder_app/features/auth/presentation/view_model/auth_viewmodel.dart';
+import 'package:bite_finder_app/screen/button_navigation_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'signup_screen.dart';
-import 'button_navigation_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
 
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
+    _emailController = TextEditingController(text: "sanjeeta@gmail.com");
+    _passwordController = TextEditingController(text: 'password123');
   }
 
   @override
@@ -27,13 +29,10 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _handleLogin() {
-    // You can add validation or API call here later
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const BottomNavigationScreen()),
-    );
+  void _handleLogin({required String email, required String password}) {
+    ref
+        .watch(authViewModelProvider.notifier)
+        .login(email: email, password: password).then((_)=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>BottomNavigationScreen())));
   }
 
   @override
@@ -146,7 +145,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Login Button
                   Center(
                     child: GestureDetector(
-                      onTap: _handleLogin,
+                      onTap: () {
+                        _handleLogin(
+                          email: _emailController.text.trim(),
+                          password: _passwordController.text,
+                        );
+                      },
                       child: Container(
                         width: double.infinity,
                         height: 55,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bite_finder_app/screen/login_screen.dart';
-import 'package:bite_finder_app/screen/signup_screen.dart';
+import 'package:bite_finder_app/features/auth/presentation/pages/login_screen.dart';
+import 'package:bite_finder_app/features/auth/presentation/pages/signup_screen.dart';
 
 class BiteWelcomePage extends StatelessWidget {
   const BiteWelcomePage({super.key});
